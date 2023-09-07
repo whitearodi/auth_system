@@ -11,9 +11,6 @@
   </.header>
 
   <.simple_form for={@form} id="login_form" action={~p"/users/log_in"} phx-update="ignore">
-    <.input field={@form[:firstname]} type="text" label="First name" required />
-    <.input field={@form[:lastname]} type="text" label="Last name" required />
-    <.input field={@form[:confirmed_at]} type="date" label="Date" required />
     <.input field={@form[:email]} type="email" label="Email" required />
     <.input field={@form[:password]} type="password" label="Password" required />
 
