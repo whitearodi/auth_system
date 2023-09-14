@@ -6,8 +6,8 @@ defmodule AuthSystem.Repo.Migrations.CreateUsers do
       add :firstname, :string, null: false
       add :lastname, :string, null: false
       add :email, :string, null: false
-      add :hash_password, :string, null: false
-      add :password, :string, null: false
+      add :hashed_password, :string, null: false
+      add :password, :string, null: true
       add :confirmed_at, :naive_datetime
 
       timestamps()
