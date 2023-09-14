@@ -1,6 +1,9 @@
 defmodule AuthSystem.Accounts.Users do
   use Ecto.Schema
   import Ecto.Changeset
+  import Bcrypt
+
+  alias AuthSystem.Accounts
 
   schema "users" do
     field :firstname, :string
@@ -39,13 +42,13 @@ defmodule AuthSystem.Accounts.Users do
 
   # Question
   defp maybe_hash_password(changeset, opts) do
-    hash_password? = Keyword.get(opts, :hash_password, true)
+    hash_password? = Keyword.get(opts, :hashed_password, true)
     password = get_change(changeset, :password)
 
     if hash_password? && password && changeset.valid? do
       changeset
       |> validate_length(:password, max: 60, count: :bytes)
-      |> put_change(:hash_password, Bycrpt.hash_pwd_salt(password))
+      |> put_change(:hashed_password, Bcrypt.hash_pwd_salt(password))
       |> delete_change(:password)
     else
       changeset
@@ -85,25 +88,28 @@ defmodule AuthSystem.Accounts.Users do
   end
 
   # verifies the password
-  def valid_password?(%AuthSystem.Accounts.Users{hashed_password: hash_password}, password)
-      when is_binary(hash_password) and byte_size(password) > 0 do
-    Bycrpt.verify_pass(
+  def valid_password?(%AuthSystem.Accounts.Users{hashed_password: hashed_password}, password)
+      when is_binary(hashed_password) and byte_size(password) > 0 do
+    Bcrypt.verify_pass(
       password,
-      hash_password
+      hashed_password
     )
   end
 
   def valid_password?(_, _) do
-    Bycrpt.no_user_verify()
+    Bcrypt.no_user_verify()
     false
   end
 
   # validate the password
-  def validate_current_password(changeset, password) do
-    if valid_password?(changeset.data, password) do
-      changeset
+  def validate_current_password(%{"email" => email} = params) do
+    user = Accounts.get_users_by_email(email)
+
+    if valid_password?(user, params["password"]) |> IO.inspect(label: "valid+++") do
+      {:ok, true}
     else
-      add_error(changeset, :current_password, "is not valid")
+      {:error, false}
+      # add_error(:current_password, "is not valid")
     end
   end
 end

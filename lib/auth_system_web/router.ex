@@ -1,6 +1,8 @@
 defmodule AuthSystemWeb.Router do
   use AuthSystemWeb, :router
 
+  import AuthSystemWeb.UserAuth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -18,12 +20,26 @@ defmodule AuthSystemWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    post "/users/set-session", UserSessionController, :create
   end
 
   # Other scopes may use custom stacks.
   # scope "/api", AuthSystemWeb do
   #   pipe_through :api
   # end
+
+  scope "/", AuthSystemWeb do
+    pipe_through [:browser, :redirect_if_users_authenticated]
+
+    live_session :redirect_if_users_authenticated do
+      # on_mount: [{AuthSystemWeb.UserAuth, :redirect_if_users_authenticated}] do
+      live "/users/register", RegistrationLive.Index, :new
+      live "/users/log_in", LoginLive.Index, :new
+      live "/users/reset_password", ResetPasswordLive.Index, :new
+    end
+
+    post "/users/log_in", UserSessionController, :create
+  end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:auth_system, :dev_routes) do

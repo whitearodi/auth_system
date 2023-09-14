@@ -5,7 +5,7 @@ defmodule AuthSystem.Accounts do
 
   # get users email
   def get_users_by_email(email) when is_binary(email) do
-    Repo.get(Users, email: email)
+    Repo.get_by(Users, email: email)
   end
 
   # Get user by email and password
@@ -38,7 +38,6 @@ defmodule AuthSystem.Accounts do
   end
 
   # Emulates that the email will change without actually changing it in the database.
-  # Question?Purpose of this fn
   def apply_users_email(users, password, attrs) do
     users
     |> Users.email_changeset(attrs)
@@ -53,17 +52,28 @@ defmodule AuthSystem.Accounts do
   end
 
   # update the users password
-  # def update_users_password(users, password, attrs) do
-  #   changeset =
-  #     users
-  #     |>Users.password_changeset(attrs)
-  #     |>Users.validate_current_password(password)
+  def update_users_password(users, password, attrs) do
+    changeset =
+      users
+      |> Users.password_changeset(attrs)
+      |> Users.validate_current_password(password)
 
-  #     |>Ecto.Multi.update(:users, changeset)
-  #     |>Repo.transaction()
-  #     |>case do
-  #       {:ok, %{users: users}} -> {:ok, users}
-  #       {:error, :user,changeset, _} -> {:error, changeset}
-  #     end
-  # end
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:users, changeset)
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{users: users}} -> {:ok, users}
+      {:error, :user, changeset, _} -> {:error, changeset}
+    end
+  end
+
+  def reset_users_password(users, attrs) do
+    Ecto.Multi.new()
+    |> Ecto.Multi.update(:users, Users.password_changeset(users, attrs))
+    |> Repo.transaction()
+    |> case do
+      {:ok, %{users: users}} -> {:ok, users}
+      {:error, :users, changeset, _} -> {:error, changeset}
+    end
+  end
 end

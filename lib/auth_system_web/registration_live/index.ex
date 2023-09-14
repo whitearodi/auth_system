@@ -5,8 +5,6 @@ defmodule AuthSystemWeb.RegistrationLive.Index do
   alias AuthSystem.Accounts.Users
 
   def mount(_params, _session, socket) do
-    # assign()
-    # assign_form()
     changeset = Accounts.change_users_registration(%Users{})
 
     socket =

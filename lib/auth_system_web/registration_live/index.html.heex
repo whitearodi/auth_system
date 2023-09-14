@@ -1,8 +1,8 @@
 <div class="mx-auto max-w-sm">
   <.header class="text-center">
-    Register for an account
+    Register Account
     <:subtitle>
-      Already registered?
+      Have an account???
       <.link navigate={~p"/users/log_in"} class="font-semibold text-brand hover:underline">
         Sign in
       </.link>
@@ -22,9 +22,9 @@
     <.error :if={@check_errors}>
       Oops, something went wrong! Please check the errors below.
     </.error>
-    <.input field={@form[:firstname]} type="text" label="Firstname" required />
-    <.input field={@form[:lastname]} type="text" label="Lastname" required />
-    <.input field={@form[:confirmed_at]} type="text" label="date" required />
+    <.input field={@form[:firstname]} type="text" label="First_name" required />
+    <.input field={@form[:lastname]} type="text" label="Last_name" required />
+    <.input field={@form[:confirmed_at]} type="date" label="date" required />
     <.input field={@form[:email]} type="email" label="Email" required />
     <.input field={@form[:password]} type="password" label="Password" required />
 
