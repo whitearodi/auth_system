@@ -1,0 +1,33 @@
+  <strong class="text-center"> Records of Payments </strong>
+<.header >
+  <:actions class="space-x-2">
+    <.link href={~p"/payments/new"}>
+      <.button  class="btn-blue">Create a record</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="payments" rows={@payments} row_click={&JS.navigate(~p"/payments/#{&1}")}>
+<%!-- <% Enum.each(@payments, fn payment -> %> --%>
+  <:col :let={payment} label="Client name" class="p-3 text-sm text-left"><%= payment.client_name %></:col>
+  <:col :let={payment} label="Amount" class="p-3 text-sm text-left"><%= payment.amount %></:col>
+  <%!-- <:col :let={payment} label="Payment method" class="p-3 text-sm text-left"><%= payment.payment_method %></:col> --%>
+  <:col :let={payment} label="Email" class="p-3 text-sm text-left"><%= payment.email %></:col>
+  <:col :let={payment} label="Payment status" class="p-3 text-sm text-left"><%= payment.payment_status %></:col>
+   <%!-- <% end %> --%>
+  <:action :let={payment} class="p-3 text-sm text-left">
+   <strong>
+    <div class="sr-only">
+      <.link navigate={~p"/payments/#{payment}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/payments/#{payment}/edit"}  class="text-blue-500 font-bold hover:underline">Edit</.link>
+    </strong>
+  </:action>
+  <:action :let={payment}>
+  <strong>
+    <.link href={~p"/payments/#{payment}"} method="delete" data-confirm="Are you sure?" class="text-blue-500 font-bold hover:underline">
+      Delete
+    </.link>
+    </strong>
+  </:action>
+</.table>

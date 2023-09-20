@@ -1,0 +1,11 @@
+<.simple_form :let={f} for={@changeset} action={@action} class="border-2 border:gray-200 rounded-md p-2 flex justify-center" >
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:item_name]} type="text" label="Item name" />
+  <.input field={f[:item_amount]} type="number" label="Item amount" />
+  <.input field={f[:payment_status]} type="text" label="Payment status" />
+  <:actions>
+    <.button class="btn-blue">Save Inventory</.button>
+  </:actions>
+</.simple_form>

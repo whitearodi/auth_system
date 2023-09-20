@@ -1,0 +1,19 @@
+<.header>
+  Payment <%= @payment.id %>
+  <:subtitle>This is a payment record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/payments/#{@payment}/edit"}>
+      <.button>Edit payment</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Client name"><%= @payment.client_name %></:item>
+  <:item title="Amount"><%= @payment.amount %></:item>
+  <:item title="Payment method"><%= @payment.payment_method %></:item>
+  <:item title="Email"><%= @payment.email %></:item>
+  <:item title="Payment status"><%= @payment.payment_status %></:item>
+</.list>
+
+<.back navigate={~p"/payments"}>Back</.back>

@@ -4,7 +4,7 @@ defmodule AuthSystemWeb.UserAuth do
   import Phoenix.Controller
   import Plug.Conn
 
-  alias AuthSystem.Accounts
+  # alias AuthSystem.Accounts
 
   def log_in_users(conn, _params \\ %{}) do
     users_return_to = get_session(conn, :users_return_to)

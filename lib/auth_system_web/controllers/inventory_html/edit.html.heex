@@ -1,0 +1,7 @@
+<.header>
+  Edit Inventory <%= @inventory.id %>
+</.header>
+
+<.inventory_form changeset={@changeset} action={~p"/inventorys/#{@inventory}"} />
+
+<.back navigate={~p"/inventorys"}>Back</.back>

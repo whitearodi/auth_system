@@ -1,0 +1,25 @@
+<.header>
+  Listing Inventorys
+  <:actions>
+    <.link href={~p"/inventorys/new"}>
+      <.button class="btn-blue">New Inventory</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="inventorys" rows={@inventorys} row_click={&JS.navigate(~p"/inventorys/#{&1}")}>
+  <:col :let={inventory} label="Item name"><%= inventory.item_name %></:col>
+  <:col :let={inventory} label="Item amount"><%= inventory.item_amount %></:col>
+  <:col :let={inventory} label="Payment status"><%= inventory.payment_status %></:col>
+  <:action :let={inventory}>
+    <div class="sr-only">
+      <.link navigate={~p"/inventorys/#{inventory}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/inventorys/#{inventory}/edit"} class="text-blue-500 font-bold hover:underline">Edit</.link>
+  </:action>
+  <:action :let={inventory}>
+    <.link href={~p"/inventorys/#{inventory}"} method="delete" data-confirm="Are you sure?" class="text-blue-500 font-bold hover:underline">
+      Delete
+    </.link>
+  </:action>
+</.table>

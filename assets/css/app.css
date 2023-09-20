@@ -3,3 +3,22 @@
 @import "tailwindcss/utilities";
 
 /* This file is for your main application CSS */
+
+/* Add these styles to your CSS file or <style> block */
+
+.text-center {
+    text-align: center;
+  }
+  
+  .btn-blue {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-blue:hover {
+    background-color: darkblue; /* Change color on hover if desired */
+  }
+  

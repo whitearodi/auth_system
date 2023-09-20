@@ -1,0 +1,30 @@
+<style>
+  .bordered-form {
+    border: 1px solid #ccc; /* Add your desired border styles here */
+    padding: 10px; /* Add padding to give some space between the border and content */
+  }
+
+  .bordered-form .input {
+    width: 50%; /* Adjust the width as needed */
+  }
+</style>
+
+<%!-- <div class="bordered-form"> --%>
+<.simple_form :let={f} for={@changeset} action={@action} class="border-2 border:gray-200 rounded-md p-2 flex justify-center">
+  <.error :if={@changeset.action}>
+   Something went wrong! Check the errors below.
+  </.error>
+  <.input field={f[:client_name]} type="text" label="Client name" />
+  <.input field={f[:amount]} type="number" label="Amount" />
+  <.input field={f[:payment_method]} type="select" options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_method)} label="Payment method" />
+  <%!-- <select> --%>
+  <%!-- <option value= "mpesa" > Mpesa</option>
+  <option value= "Cash" > Cash</option>
+  </select> --%>
+  <.input field={f[:email]} type="text" label="Email" />
+  <.input field={f[:payment_status]} type="text" label="Payment status" />
+  <:actions>
+    <.button class="btn-blue">Save</.button>
+  </:actions>
+</.simple_form>
+<%!-- </div> --%>

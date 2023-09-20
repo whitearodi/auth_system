@@ -1,0 +1,16 @@
+<.header>
+  Inventory <%= @inventory.id %>
+  <:actions>
+    <.link href={~p"/inventorys/#{@inventory}/edit"}>
+      <.button>Edit inventory</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Item name"><%= @inventory.item_name %></:item>
+  <:item title="Item amount"><%= @inventory.item_amount %></:item>
+  <:item title="Payment status"><%= @inventory.payment_status %></:item>
+</.list>
+
+<.back navigate={~p"/inventorys"}>Back</.back>

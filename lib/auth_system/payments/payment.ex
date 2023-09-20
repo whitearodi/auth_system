@@ -5,17 +5,16 @@ defmodule AuthSystem.Payments.Payment do
   schema "payments" do
     field :client_name, :string
     field :amount, :integer
-    field :payment_method, :string
+    field :payment_method, Ecto.Enum, values: [:MPESA, :CASH]
     field :email, :string
     field :payment_status, :string
 
     timestamps()
   end
 
-
-  def changeset(payment, attrs \\ %{}) do
+  def changeset(payment, params \\ %{}) do
     payment
-    |> cast(attrs, [:client_name, :amount, :payment_status, :email, :payment_method])
+    |> cast(params, [:client_name, :amount, :payment_method, :email, :payment_status])
     |> validate_required([:client_name, :amount, :payment_status, :email, :payment_method])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> unique_constraint(:email)

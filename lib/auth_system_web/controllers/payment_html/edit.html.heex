@@ -1,0 +1,8 @@
+<.header>
+  Edit Payment <%= @payment.id %>
+  <:subtitle>Edit form here</:subtitle>
+</.header>
+
+<.payment_form changeset={@changeset} action={~p"/payments/#{@payment}"} />
+
+<.back navigate={~p"/payments"}>Back </.back>
