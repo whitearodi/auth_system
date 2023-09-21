@@ -21,13 +21,13 @@ defmodule AuthSystemWeb.UserSessionController do
     create(conn, params, "Welcome back")
   end
 
-  defp create(conn, %{"users" => users_params}, info) do
-    %{"email" => email} = users_params
+  defp create(conn, %{"users": %{"email" => email}}, info) do
+    # %{"email" => email} = users_params
 
-    if Accounts.get_users_by_email(email) do
+    if  user = Accounts.get_users_by_email(email) do
       conn
       |> put_flash(:info, info)
-      |> UserAuth.log_in_users(users_params)
+      |> UserAuth.log_in_users(user)
     else
       conn
       |> put_flash(:error, "Invalid email or password")
