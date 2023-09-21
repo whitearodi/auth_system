@@ -1,5 +1,5 @@
+<strong class="text-2xl"> Listing Inventorys</strong>
 <.header>
-  Listing Inventorys
   <:actions>
     <.link href={~p"/inventorys/new"}>
       <.button class="btn-blue">New Inventory</.button>
@@ -8,9 +8,9 @@
 </.header>
 
 <.table id="inventorys" rows={@inventorys} row_click={&JS.navigate(~p"/inventorys/#{&1}")}>
-  <:col :let={inventory} label="Item name"><%= inventory.item_name %></:col>
-  <:col :let={inventory} label="Item amount"><%= inventory.item_amount %></:col>
-  <:col :let={inventory} label="Payment status"><%= inventory.payment_status %></:col>
+  <:col :let={inventory} label="Item name"  class="p-3 text-sm text-left"><%= inventory.item_name %></:col>
+  <:col :let={inventory} label="Item amount"  class="p-3 text-sm text-left"><%= inventory.item_amount %></:col>
+  <:col :let={inventory} label="Payment status"  class="p-3 text-sm text-left"><%= inventory.payment_status %></:col>
   <:action :let={inventory}>
     <div class="sr-only">
       <.link navigate={~p"/inventorys/#{inventory}"}>Show</.link>
