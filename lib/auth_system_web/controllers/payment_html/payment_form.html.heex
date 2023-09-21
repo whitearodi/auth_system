@@ -22,7 +22,7 @@
   <option value= "Cash" > Cash</option>
   </select> --%>
   <.input field={f[:email]} type="text" label="Email" />
-  <.input field={f[:payment_status]} type="text" label="Payment status" />
+  <.input field={f[:payment_status]} type="select"  options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_status)} label="Payment status" />
   <:actions>
     <.button class="btn-blue">Save</.button>
   </:actions>
