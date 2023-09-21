@@ -36,7 +36,7 @@ defmodule AuthSystemWeb.UserSessionController do
     end
   end
 
-  def delete(conn, _params) do
+  def log_out(conn, _params) do
     conn
     |> put_flash(:info, "Logged out successfully")
     |> UserAuth.log_out_users()

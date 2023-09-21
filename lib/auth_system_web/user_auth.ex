@@ -17,7 +17,7 @@ defmodule AuthSystemWeb.UserAuth do
   def log_out_users(conn) do
     conn
     |> configure_session(drop: true)
-    |> redirect(to: ~p"/")
+    |> redirect(to: ~p"/users/log_in")
   end
 
   defp renew_session(conn) do
@@ -85,15 +85,16 @@ defmodule AuthSystemWeb.UserAuth do
     else
       conn
       |> put_flash(:error, "You must log in to access this page")
-      |> maybe_store_return_to()
+      # |> maybe_store_return_to()
       |> redirect(to: ~p"/users/log_in")
       |> halt()
     end
   end
 
-  defp maybe_store_return_to(%{method: "GET" = conn}) do
-    put_session(conn, :users_return_to, current_path(conn))
-  end
+  # defp maybe_store_return_to(%{method: "GET"} = conn) do
+  #   IO.inspect(conn, label: "CONN")
+  #   put_session(conn, :user_return_to, current_path(conn))
+  # end
 
   defp maybe_store_return_to(conn), do: conn
 

@@ -1,4 +1,5 @@
 defmodule AuthSystemWeb.Router do
+
   use AuthSystemWeb, :router
 
   import AuthSystemWeb.UserAuth
@@ -12,15 +13,36 @@ defmodule AuthSystemWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :layouts do
+    plug(:put_root_layout, html: {AuthSystemWeb.Layouts, :sidebar})
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", AuthSystemWeb do
-    pipe_through :browser
+    pipe_through [:browser, :layouts]
 
     get "/", PageController, :home
+
+    # get "/payments", PaymentController, :index
+    # get "/payments/new", PaymentController, :new
+    # post "/payments/new", PaymentController, :create
+    # get "/payments/:id/edit", PaymentController, :edit
+    # get "/payments/:id/show", PaymentController, :show
+    # delete "/payments/:id/delete", PaymentController, :delete
+
+    resources "/payments", PaymentController
+
+
+    resources "/inventorys", InventoryController
+
+    # resources "/users", UserController
+
     post "/users/set-session", UserSessionController, :create
+
+    get "/users/log_out", UserSessionController, :log_out
   end
 
   # Other scopes may use custom stacks.
@@ -40,6 +62,14 @@ defmodule AuthSystemWeb.Router do
 
     post "/users/log_in", UserSessionController, :create
   end
+
+  # scope "/", AuthSystemWeb do
+  #   pipe_through [:browser]
+
+  #   get "/payments", PaymentController, :index
+  #   post "/payments/new", PaymentController, :create
+  #   delete "/payments/:id", PaymentController, :delete
+  # end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:auth_system, :dev_routes) do

@@ -16,9 +16,8 @@
     padding: 10px 20px; /* Adjust padding as needed */
     border: none;
     cursor: pointer;
+    
   }
   
-  .btn-blue:hover {
-    background-color: darkblue; /* Change color on hover if desired */
-  }
+  
   

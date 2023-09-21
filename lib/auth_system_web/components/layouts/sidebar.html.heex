@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title suffix=" · Phoenix Framework">
+      <%= assigns[:page_title] || "AuthSystem" %>
+    </.live_title>
+  </head>
+  <body class="bg-white antialiased grid grid-cols-12">
+    <.flash_group flash={@flash} />
+    <div class="col-span-2 h-screen border-r-2">
+      <div class="flex w-full border-zinc-100 py-3 text-sm">
+        <div class="sidebar flex flex-col p-2">
+          <a
+            href="/"
+            class="group relative bg-gray-300 rounded-2xl px-3 py-2 text-sm font-semibold leading-6 text-zinc-900 sm:py-2 hover:bg-teal-700 hover:text-white"
+          >
+            Dashboard
+          </a>
+
+          <a
+            href="/payments"
+            class="group relative rounded-2xl px-1 py-4 text-sm font-semibold leading-6 text-zinc-900 sm:py-6"
+          >
+            Payments
+          </a>
+          <a
+            href="/inventorys"
+            class="group relative rounded-2xl px-1 py-4 text-sm font-semibold leading-6 text-zinc-900 sm:py-6"
+          >
+            Inventory
+          </a>
+
+          <a
+            href="/users/log_out" method="delete"
+            class="group relative rounded-2xl px-1 py-4 text-sm font-semibold leading-6 text-zinc-900 sm:py-6"
+          >
+            logout
+          </a>
+        </div>
+      </div>
+      <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+      <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+      </script>
+    </div>
+    <div class="col-span-10">
+      <%= @inner_content %>
+    </div>
+  </body>
+</html>
