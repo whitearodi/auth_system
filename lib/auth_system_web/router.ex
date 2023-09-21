@@ -11,6 +11,7 @@ defmodule AuthSystemWeb.Router do
     plug :put_root_layout, html: {AuthSystemWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :fetch_current_users
   end
 
   pipeline :layouts do
@@ -22,7 +23,7 @@ defmodule AuthSystemWeb.Router do
   end
 
   scope "/", AuthSystemWeb do
-    pipe_through [:browser, :layouts]
+    pipe_through [:browser, :layouts, :require_authenticated_users]
 
     get "/", PageController, :home
 
@@ -40,7 +41,6 @@ defmodule AuthSystemWeb.Router do
 
     # resources "/users", UserController
 
-    post "/users/set-session", UserSessionController, :create
 
     get "/users/log_out", UserSessionController, :log_out
   end
@@ -59,6 +59,8 @@ defmodule AuthSystemWeb.Router do
       live "/users/log_in", LoginLive.Index, :new
       live "/users/reset_password", ResetPasswordLive.Index, :new
     end
+    post "/users/set-session", UserSessionController, :create
+
 
     post "/users/log_in", UserSessionController, :create
   end

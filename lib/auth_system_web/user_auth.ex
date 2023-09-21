@@ -4,13 +4,17 @@ defmodule AuthSystemWeb.UserAuth do
   import Phoenix.Controller
   import Plug.Conn
 
-  # alias AuthSystem.Accounts
+  alias AuthSystem.Accounts
 
-  def log_in_users(conn, _params \\ %{}) do
+  def log_in_users(conn, params \\ %{}) do
     users_return_to = get_session(conn, :users_return_to)
+    user = Accounts.get_users_by_email(params["email"])
 
     conn
-    |> renew_session()
+    |> assign(:current_users, user)
+    |> IO.inspect(label: "LOGIN")
+    |> put_session(:current_users, user)
+    # |> renew_session()
     |> redirect(to: users_return_to || signed_in_path(conn))
   end
 

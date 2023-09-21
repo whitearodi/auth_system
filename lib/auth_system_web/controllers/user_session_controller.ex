@@ -27,7 +27,7 @@ defmodule AuthSystemWeb.UserSessionController do
     if Accounts.get_users_by_email(email) do
       conn
       |> put_flash(:info, info)
-      |> UserAuth.log_in_users()
+      |> UserAuth.log_in_users(users_params)
     else
       conn
       |> put_flash(:error, "Invalid email or password")
