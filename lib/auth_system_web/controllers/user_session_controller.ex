@@ -21,10 +21,10 @@ defmodule AuthSystemWeb.UserSessionController do
     create(conn, params, "Welcome back")
   end
 
-  defp create(conn, %{"users" => %{"email" => email}}, info) do
+  defp create(conn, %{"users" => %{"email" => email, "password" => password}}, info) do
     # %{"email" => email} = users_params
 
-    if  user = Accounts.get_users_by_email(email) do
+    if  user = Accounts.get_users_by_email_and_password(email, password) do
       conn
       |> put_flash(:info, info)
       |> UserAuth.log_in_users(user)

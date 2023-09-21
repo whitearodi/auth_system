@@ -13,8 +13,8 @@ defmodule AuthSystemWeb.UserAuth do
     conn
     |> assign(:current_users, user)
     |> IO.inspect(label: "LOGIN")
+    |> renew_session()
     |> put_session(:current_users, user)
-    # |> renew_session()
     |> redirect(to: users_return_to || signed_in_path(conn))
   end
 

@@ -7,7 +7,7 @@ defmodule AuthSystem.Payments.Payment do
     field :amount, :integer
     field :payment_method, Ecto.Enum, values: [:MPESA, :CASH]
     field :email, :string
-    field :payment_status, :string
+    field :payment_status, Ecto.Enum, values: [:Completed, :Pending]
 
     timestamps()
   end
