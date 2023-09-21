@@ -6,9 +6,9 @@ defmodule AuthSystemWeb.UserAuth do
 
   alias AuthSystem.Accounts
 
-  def log_in_users(conn, params \\ %{}) do
+  def log_in_users(conn, user) do
     users_return_to = get_session(conn, :users_return_to)
-    user = Accounts.get_users_by_email(params["email"])
+    # user = Accounts.get_users_by_email(params["email"])
 
     conn
     |> assign(:current_users, user)

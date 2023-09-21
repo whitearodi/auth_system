@@ -21,7 +21,7 @@ defmodule AuthSystemWeb.UserSessionController do
     create(conn, params, "Welcome back")
   end
 
-  defp create(conn, %{"users": %{"email" => email}}, info) do
+  defp create(conn, %{"users" => %{"email" => email}}, info) do
     # %{"email" => email} = users_params
 
     if  user = Accounts.get_users_by_email(email) do
