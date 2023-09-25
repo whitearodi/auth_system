@@ -15,5 +15,6 @@ defmodule AuthSystem.Sales.Sale do
     sale
     |> cast(params, [:inventory_id, :quantity])
     |> validate_required([:inventory_id, :quantity])
+    |> validate_number(:quantity, greater_than: 0, message: "Must be greater than 0")
   end
 end

@@ -18,5 +18,6 @@ defmodule AuthSystem.Payments.Payment do
     |> validate_required([:client_name, :amount, :payment_status, :email, :payment_method])
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> unique_constraint(:email)
+    |> validate_number(:amount, greater_than: 10, message: "Must be greater than 10")
   end
 end
