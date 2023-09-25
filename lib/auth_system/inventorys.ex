@@ -6,6 +6,7 @@ defmodule AuthSystem.Inventorys do
   def list_inventory() do
    Inventory
     |> Repo.all()
+  |> Repo.preload([:sales])
   end
 
   def get_inventory!(id) do

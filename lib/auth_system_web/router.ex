@@ -39,6 +39,8 @@ defmodule AuthSystemWeb.Router do
 
     resources "/inventorys", InventoryController
 
+    resources "/sales", SaleController
+
     # resources "/users", UserController
 
 

@@ -16,7 +16,7 @@ defmodule AuthSystemWeb.InventoryController do
 
   def create(conn, %{"inventory" => inventory_params}) do
     case Inventorys.create_inventory(inventory_params) do
-      {:ok, inventory} ->
+      {:ok, _inventory} ->
         conn
         |> put_flash(:info, "Created record.")
         |> redirect(to: ~p"/inventorys")

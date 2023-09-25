@@ -10,6 +10,7 @@
 <.table id="inventorys" rows={@inventorys} row_click={&JS.navigate(~p"/inventorys/#{&1}")}>
   <:col :let={inventory} label="Item name"  class="p-3 text-sm text-left"><%= inventory.item_name %></:col>
   <:col :let={inventory} label="Item amount"  class="p-3 text-sm text-left"><%= inventory.item_amount %></:col>
+  <:col :let={inventory} label="Quantity"  class="p-3 text-sm text-left"><%= inventory.quantity - Enum.reduce(inventory.sales, 0, fn sales, acc -> acc + sales.quantity end )%></:col>
   <:col :let={inventory} label="Payment status"  class="p-3 text-sm text-left"><%= inventory.payment_status %></:col>
   <:action :let={inventory}>
     <div class="sr-only">
@@ -20,6 +21,11 @@
   <:action :let={inventory}>
     <.link href={~p"/inventorys/#{inventory}"} method="delete" data-confirm="Are you sure?" class="text-blue-500 font-bold hover:underline">
       Delete
+    </.link>
+  </:action>
+  <:action :let={sale}>
+     <.link href={~p"/sales/new"} class="text-blue-500 font-bold hover:underline">
+      Sales
     </.link>
   </:action>
 </.table>

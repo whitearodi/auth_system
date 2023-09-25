@@ -1,0 +1,17 @@
+<strong class="text-2xl"> Listing of Sales</strong>
+<.header>
+  <:actions>
+    <%!-- <.link href={~p"/sales/new"}>
+      <.button>New Inventory</.button>
+    </.link> --%>
+  </:actions>
+</.header>
+
+<.table id="sales" rows={@sales} row_click={&JS.navigate(~p"/sales/#{&1}")}>
+  <:col :let={sale} label="Item Quantity"  class="p-3 text-sm text-left"><%= sale.quantity %></:col>
+  <:action :let={sale}>
+    <div class="sr-only">
+      <.link navigate={~p"/sales/#{sale}"}>Show</.link>
+    </div>
+  </:action>
+</.table>
