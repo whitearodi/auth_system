@@ -28,9 +28,8 @@ defmodule AuthSystemWeb.SaleController do
     end
   end
 
-  def show(conn, %{"id" => id} = sale) do
-    sale
-    |> Sales.get_sales!(id)
+  def show(conn, %{"id" => id}) do
+    sale = Sales.get_sales!(id)
 
     render(conn, :show, sale: sale)
   end

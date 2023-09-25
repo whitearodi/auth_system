@@ -12,6 +12,7 @@ defmodule AuthSystem.Sales do
 
   def get_sales!(id) do
     Repo.get!(Sale, id)
+    |> Repo.preload([:inventory])
   end
 
   def create_sale(params \\ %{}) do

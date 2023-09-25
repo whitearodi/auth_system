@@ -1,0 +1,8 @@
+<.header>
+  Sale <%= @sale.id %>
+</.header>
+
+<.list>
+  <:item title="Item Name"><%= @sale.inventory.item_name %></:item>
+  <:item title="Item Quantity"><%= @sale.quantity %></:item>
+</.list>
