@@ -9,9 +9,9 @@ defmodule AuthSystem.Inventorys.Inventory do
     field :quantity, :integer
     field :payment_status, :string
 
+    has_many :sales, Sale
     timestamps()
 
-    has_many :sales, Sale
   end
 
   def changeset(inventory, attrs \\ %{}) do

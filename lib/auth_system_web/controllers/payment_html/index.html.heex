@@ -11,7 +11,7 @@
 <%!-- <% Enum.each(@payments, fn payment -> %> --%>
   <:col :let={payment} label="Client name" class="p-3 text-sm text-left"><%= payment.client_name %></:col>
   <:col :let={payment} label="Amount" class="p-3 text-sm text-left"><%= payment.amount %></:col>
-  <%!-- <:col :let={payment} label="Payment method" class="p-3 text-sm text-left"><%= payment.payment_method %></:col> --%>
+  <:col :let={payment} label="Payment method" class="p-3 text-sm text-left"><%= payment.payment_method %></:col>
   <:col :let={payment} label="Email" class="p-3 text-sm text-left"><%= payment.email %></:col>
   <:col :let={payment} label="Payment status" class="p-3 text-sm text-left"><%= payment.payment_status %></:col>
    <%!-- <% end %> --%>

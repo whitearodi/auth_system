@@ -6,6 +6,8 @@ defmodule AuthSystem.Sales do
 
   def list_sales() do
     Repo.all(Sale)
+    # |> IO.inspect(label: "JUST CHECKING: ")
+    |> Repo.preload([:inventory])
   end
 
   def get_sales!(id) do
