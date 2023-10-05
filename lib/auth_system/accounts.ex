@@ -77,8 +77,6 @@ defmodule AuthSystem.Accounts do
     end
   end
 
-  alias AuthSystem.Accounts.User
-
   @doc """
   Returns the list of users.
 

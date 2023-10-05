@@ -1,6 +1,9 @@
 defmodule AuthSystem.Sales do
-  import Ecto.Query, warn: false
+  import Ecto.Query
 
+
+  alias AuthSystem.Inventorys.Inventory
+  alias Ecto.Multi
   alias AuthSystem.Repo
   alias AuthSystem.Sales.Sale
 
@@ -14,6 +17,19 @@ defmodule AuthSystem.Sales do
     Repo.get!(Sale, id)
     |> Repo.preload([:inventory])
   end
+
+
+  # def create_sale(params \\ %{}) do
+  #   params["quantity"]
+  #   Multi.new()
+  #   |> Multi.update(:inventory, Inventory.changeset(params))
+  #   |> Multi.insert(:sale, fn %{inventory: inventory} ->
+  #     sale = %Sale{}
+  #     %{sale | inventory: [] }
+  #   end)
+  #   |>  IO.inspect(inventory)
+  #   |> Repo.transaction()
+  # end
 
   def create_sale(params \\ %{}) do
     %Sale{}
