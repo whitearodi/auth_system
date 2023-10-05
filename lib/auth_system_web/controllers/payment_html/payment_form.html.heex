@@ -10,19 +10,34 @@
 </style>
 
 <%!-- <div class="bordered-form"> --%>
-<.simple_form :let={f} for={@changeset} action={@action} class="border-2 border:gray-200 rounded-md p-2 flex justify-center">
+<.simple_form
+  :let={f}
+  for={@changeset}
+  action={@action}
+  class="border-2 border:gray-200 rounded-md p-2 flex justify-center"
+>
   <.error :if={@changeset.action}>
-   Something went wrong! Check the errors below.
+    Something went wrong! Check the errors below.
   </.error>
   <.input field={f[:client_name]} type="text" label="Client name" />
   <.input field={f[:amount]} type="number" label="Amount" />
-  <.input field={f[:payment_method]} type="select" options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_method)} label="Payment method" />
+  <.input
+    field={f[:payment_method]}
+    type="select"
+    options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_method)}
+    label="Payment method"
+  />
   <%!-- <select> --%>
   <%!-- <option value= "mpesa" > Mpesa</option>
   <option value= "Cash" > Cash</option>
   </select> --%>
   <.input field={f[:email]} type="text" label="Email" />
-  <.input field={f[:payment_status]} type="select"  options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_status)} label="Payment status" />
+  <.input
+    field={f[:payment_status]}
+    type="select"
+    options={Ecto.Enum.values(AuthSystem.Payments.Payment, :payment_status)}
+    label="Payment status"
+  />
   <:actions>
     <.button class="btn-blue">Save</.button>
   </:actions>

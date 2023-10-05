@@ -16,15 +16,22 @@ defmodule AuthSystemWeb.SaleController do
     render(conn, :new, changeset: changeset, products: products)
   end
 
-  def create(conn, %{"sale" => sale_params}) do
+  def create(conn, %{"sale" => %{"quantity" => quantity} = sale_params}) do
     case Sales.create_sale(sale_params) do
-      {:ok, _sale} ->
+      {:ok, sale} ->
+        inventory = Inventorys.get_inventory!(sale.inventory_id)
+
+        Inventorys.update_inventory(inventory, %{
+          quantity: inventory.quantity - String.to_integer(quantity)
+        })
+
         conn
         |> put_flash(:info, "Sale created successfully")
         |> redirect(to: ~p"/sales")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :new, changeset: changeset)
+        products = Inventorys.list_inventory()
+        render(conn, :new, changeset: changeset, products: products)
     end
   end
 

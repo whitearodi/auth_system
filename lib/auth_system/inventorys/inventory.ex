@@ -11,7 +11,14 @@ defmodule AuthSystem.Inventorys.Inventory do
 
     has_many :sales, Sale
     timestamps()
+  end
 
+  def create_changeset(inventory, attrs \\ %{}) do
+    inventory
+    |> cast(attrs, [:item_name, :item_amount, :payment_status, :quantity])
+    |> validate_required([:item_name, :item_amount, :payment_status, :quantity])
+    |> validate_number(:item_amount, greater_than: 10, message: "Must be greater than 10")
+    |> validate_number(:quantity, greater_than: 1, message: "Must be greater than 1")
   end
 
   def changeset(inventory, attrs \\ %{}) do
@@ -19,6 +26,5 @@ defmodule AuthSystem.Inventorys.Inventory do
     |> cast(attrs, [:item_name, :item_amount, :payment_status, :quantity])
     |> validate_required([:item_name, :item_amount, :payment_status, :quantity])
     |> validate_number(:item_amount, greater_than: 10, message: "Must be greater than 10")
-    |> validate_number(:quantity, greater_than: 1, message: "Must be greater than 1")
   end
 end

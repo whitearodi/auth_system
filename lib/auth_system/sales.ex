@@ -1,7 +1,6 @@
 defmodule AuthSystem.Sales do
   import Ecto.Query
 
-
   alias AuthSystem.Inventorys.Inventory
   alias Ecto.Multi
   alias AuthSystem.Repo
@@ -17,7 +16,6 @@ defmodule AuthSystem.Sales do
     Repo.get!(Sale, id)
     |> Repo.preload([:inventory])
   end
-
 
   # def create_sale(params \\ %{}) do
   #   params["quantity"]
@@ -43,8 +41,13 @@ defmodule AuthSystem.Sales do
     |> Repo.update()
   end
 
-  def change_sale(%Sale{}, params\\ %{}) do
-  Sale.changeset(%Sale{}, params)
+  def change_sale(%Sale{}, params \\ %{}) do
+    Sale.changeset(%Sale{}, params)
   end
 
+  #factor in when the db times out & rolling back the process 
+  def make_sale(sale_params) do
+    # Ecto.Multi
+    # |> Repo.transaction()
+  end
 end
