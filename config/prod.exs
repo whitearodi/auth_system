@@ -19,3 +19,7 @@ config :logger, level: :info
 
 # Runtime production configuration, including reading
 # of environment variables, is done on config/runtime.exs.
+
+#Force SSL
+config :auth_system, AuthSystemWeb.Endpoint,
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
