@@ -12,7 +12,7 @@ config :auth_system,
 
 # Configures the endpoint
 config :auth_system, AuthSystemWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "https://auth-system.gigalixirapp.com"],
   render_errors: [
     formats: [html: AuthSystemWeb.ErrorHTML, json: AuthSystemWeb.ErrorJSON],
     layout: false
