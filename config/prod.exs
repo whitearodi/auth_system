@@ -6,7 +6,8 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :auth_system, AuthSystemWeb.Endpoint,
-url: [host: "https://auth-system.gigalixirapp.com"],
+  url: [host: "https://auth-system.gigalixirapp.com"],
+ check_origin: ["https://auth-system.gigalixirapp.com"],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
